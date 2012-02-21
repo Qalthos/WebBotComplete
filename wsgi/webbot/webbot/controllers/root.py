@@ -96,7 +96,8 @@ class RootController(BaseController):
     def store(self, value):
         import memcache
         mc = memcache.Client(['127.0.0.1:11211'])
-        cached=mc.set('key', value)
+        mc.set('key', value)
+        cached=mc.get(value)
         return dict(cached=cached)
 
     @expose('json')
