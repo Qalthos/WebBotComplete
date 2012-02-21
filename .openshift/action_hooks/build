@@ -8,10 +8,10 @@ source ~/$OPENSHIFT_APP_NAME/virtenv/bin/activate
 
 
 # Have apache serve up all of our static resources
-echo "Symlinking static resources from tg2app/public"
-ln -s $OPENSHIFT_REPO_DIR/wsgi/tg2app/tg2app/public/* $OPENSHIFT_REPO_DIR/wsgi/static/
+echo "Symlinking static resources from webbot/public"
+ln -s $OPENSHIFT_REPO_DIR/wsgi/webbot/webbot/public/* $OPENSHIFT_REPO_DIR/wsgi/static/
 
-cd $OPENSHIFT_REPO_DIR/wsgi/tg2app
+cd $OPENSHIFT_REPO_DIR/wsgi/webbot
 
 # We're not doing 'install' to save space.
 python setup.py develop

@@ -2,8 +2,8 @@
 import os, sys
 
 here = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(here, 'tg2app'))
-config = os.path.join(here, 'tg2app', 'openshift.ini')
+sys.path.insert(0, os.path.join(here, 'webbot'))
+config = os.path.join(here, 'webbot', 'openshift.ini')
 
 virtenv = os.environ.get('APPDIR', '') + '/virtenv/'
 os.environ['PYTHON_EGG_CACHE'] = os.path.join(virtenv, 'lib/python2.6/site-packages')
