@@ -132,6 +132,8 @@ class RootController(BaseController):
         for key in kwargs.keys(): robots += key + ' '
         robots = robots[:-1]
         game_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, robots + str(clock())))
+        import os
+        raise Exception(os.getcwd())
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots], cwd='../pybotwar')
 
         mc = memcache.Client(['127.0.0.1:11211'])
