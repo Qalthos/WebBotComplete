@@ -132,9 +132,15 @@ class RootController(BaseController):
         for key in kwargs.keys(): robots += key + ' '
         robots = robots[:-1]
         game_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, robots + str(clock())))
+
+        # Try to detect OpenShiftiness
         import os
-        raise Exception(os.getcwd())
-        subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots], cwd='../pybotwar')
+        base = os.environ.get('OPENSHIFT_REPO_DIR')
+        if not base:
+            base = '../../'
+
+        subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
+                         cwd=base+'pybotwar')
 
         mc = memcache.Client(['127.0.0.1:11211'])
         games = mc.get('games') or []
