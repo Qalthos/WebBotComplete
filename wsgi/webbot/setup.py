@@ -39,7 +39,7 @@ install_requires=[
     "tw.forms",
     "python-memcached",
     "Box2D",
-    "python-mysql",
+    "mysql-python",
     ]
 
 if sys.version_info[:2] == (2,4):
