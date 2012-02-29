@@ -126,11 +126,10 @@ class RootController(BaseController):
         # format
 
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
-            db = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_URL')).pybot
-            db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-                            os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'))
         else:
-            db = Connection().pybot
+            conn = Connection()
+        db = conn.pybot
 
         return db[game_id].find_one()
 
