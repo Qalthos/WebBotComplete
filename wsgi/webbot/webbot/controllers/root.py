@@ -77,7 +77,7 @@ class RootController(BaseController):
             conn = Connection()
         db = conn.pybot
 
-        return json.loads(db.find_one({'id':game_id}).encode('ascii')))
+        return json.loads(db.find_one({'id':game_id}).encode('ascii'))
 
     @expose('webbot.templates.environ')
     def environ(self):
