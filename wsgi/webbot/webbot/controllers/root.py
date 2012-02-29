@@ -75,8 +75,8 @@ class RootController(BaseController):
             conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
                               int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
             db = conn.pybot
-            db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-                              os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            #db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
+            #                os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
         else:
             db = Connection().pybot
 
