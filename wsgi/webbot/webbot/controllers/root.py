@@ -74,13 +74,10 @@ class RootController(BaseController):
         return {'robots': []}
 
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
-            conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
-                              int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
-            db = conn.pybot
-            db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-                            os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            conn = Connection.from_uri(os.environ.get('OPENSHIFT_NOSQL_DB_URI'))
         else:
-            db = Connection().pybot
+            conn = Connection()
+        db = conn.pybot
 
         return db[game_id].find_one()
 

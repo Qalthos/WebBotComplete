@@ -39,13 +39,10 @@ class Game(object):
         self.game_id = gameID
 
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
-            conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
-                              int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
-            self.mc = conn.pybot
-            self.mc.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-                                 os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            conn = Connection.from_uri(os.environ.get('OPENSHIFT_NOSQL_DB_URI'))
         else:
-            self.mc = Connection().pybot
+            conn = Connection()
+        self.mc = conn.pybot
 
 
         self.givenRobots = robots
