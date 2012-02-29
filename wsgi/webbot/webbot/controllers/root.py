@@ -62,6 +62,7 @@ class RootController(BaseController):
     def games(self):
         """List all the available games."""
         game_list = DBSession.query(model.Game).all()
+        print(game_list)
         return dict(games=game_list)
 
     @expose('json')
