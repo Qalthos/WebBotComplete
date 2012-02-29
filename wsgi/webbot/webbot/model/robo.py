@@ -16,4 +16,5 @@ class Game(DeclarativeBase):
 
     id = Column(Unicode(255), primary_key=True)
     username = Column(Unicode(255), nullable=True)
+    name = Column(Unicode(255), nullable=True)
     date = Column(DateTime, nullable=True)
