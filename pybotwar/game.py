@@ -248,7 +248,7 @@ class Game(object):
         worldData = self.w.to_dict()
         worldData['id'] = self.game_id
         worldData['time'] = -1
-        self.mc.update({}, worldData, upsert=True)
+        self.mc[self.game_id].update({}, worldData, upsert=True)
         print 'FINISHING'
 
         models = self.models
