@@ -38,7 +38,6 @@ install_requires=[
     "repoze.what.plugins.sql>=1.0.1",
     "tw.forms",
     "python-memcached",
-    "Box2D",
     "mysql-python",
     ]
 
