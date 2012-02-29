@@ -236,7 +236,7 @@ class Game(object):
         worldData = w.to_dict()
         worldData['time'] = conf.maxtime - rnd/60
         worldData['_id'] = 1
-        self.mc[self.game_id].save(worldData)
+        self.mc[self.game_id].update({}, worldData, upsert=True)
 
         # Maybe turn this into a log later
         #if not rnd%60:
