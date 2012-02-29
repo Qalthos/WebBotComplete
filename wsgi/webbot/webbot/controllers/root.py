@@ -17,6 +17,7 @@ import subprocess
 import uuid
 from time import clock, sleep
 import json
+import os
 
 __all__ = ['RootController']
 
