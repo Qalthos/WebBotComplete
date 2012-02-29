@@ -74,13 +74,13 @@ class RootController(BaseController):
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
             conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
                               int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
-            conn.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-                              int(os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD')))
+            db = conn.pybot
+            db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
+                              os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
         else:
-            conn = Connection()
-        db = conn.pybot[game_id]
+            db = Connection().pybot
 
-        return db.find_one()
+        return db[game_id].find_one()
 
     @expose('webbot.templates.environ')
     def environ(self):
