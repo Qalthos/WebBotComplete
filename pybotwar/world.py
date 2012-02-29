@@ -525,7 +525,7 @@ class World(object):
                 #print name, 'shoots'
                 self.makebullet(name)
 
-    def to_dict(self, game_id, timeleft):
+    def to_dict(self):
         bullets = [b.to_dict() for b in self.bullets]
         robots = [r.to_dict() for r in self.robots.values()]
         sprites = [s.to_dict() for s in self.sprites]
