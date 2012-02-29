@@ -37,7 +37,7 @@ install_requires=[
     "repoze.what-quickstart",
     "repoze.what.plugins.sql>=1.0.1",
     "tw.forms",
-    "python-memcached",
+    "pymongo",
     "mysql-python",
     ]
 
