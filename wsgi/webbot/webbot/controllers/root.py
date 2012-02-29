@@ -65,12 +65,12 @@ class RootController(BaseController):
     @expose()
     def do_logout(self, name):
         query = model.Login.query.filter_by(name=name)
-        
+
         if query.count() == 0:
             # wtf...  when would this happen?
             log_message("'%s' (who DNE) tried to logout." % name)
             redirect('http://ritfloss.rtfd.org/')
-        
+
         user = query.first()
         log_message("'%s' logged out." % user.name)
         model.DBSession.delete(user)
@@ -79,7 +79,7 @@ class RootController(BaseController):
     @expose()
     def do_login(self, name, access_token):
         query = model.Login.query.filter_by(name=name)
-        
+
         if query.count() == 0:
             user = model.Login(name=name)
             model.DBSession.add(user)
@@ -184,8 +184,8 @@ class RootController(BaseController):
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
                          cwd=base+'pybotwar')
 
-        new_game = model.Game(id=game_id, name=robots)
-        DBSession.add(new_game)
+        #new_game = model.Game(id=game_id, name=robots)
+        #DBSession.add(new_game)
         sleep(1)
         redirect('/game?game_id=%s' % (game_id))
 
