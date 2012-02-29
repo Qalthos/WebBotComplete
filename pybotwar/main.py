@@ -60,7 +60,7 @@ if __name__ == '__main__':
                     help="Specify which robots to battle")
     parser.add_option("-I", "--gameid", dest="gameid",
                     action="store",type='str',default=0,
-                    help="Specify the game id for storing data in memcached")
+                    help="Specify the game id for storing data in nosql")
 
     (options, args) = parser.parse_args()
 

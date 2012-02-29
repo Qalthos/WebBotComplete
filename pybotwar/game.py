@@ -29,14 +29,22 @@ from world import box2d
 
 import stats
 import conf
-import memcache
+from pymongo import Connection
+import os
 
 class Game(object):
     def __init__(self, testmode=False, tournament=None, gameID=0, robots=[]):
         self.testmode = testmode
         self.tournament = tournament
         self.game_id = gameID
-        self.mc = memcache.Client(['127.0.0.1:11211'],debug=0)
+
+        if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
+            conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
+                                 os.environ.get('OPENSHIFT_NOSQL_DB_PORT'))
+        else:
+            conn = Connection()
+        self.mc = conn.pybot
+
         self.givenRobots = robots
 
         self.models = {}
@@ -224,9 +232,10 @@ class Game(object):
 
 
         w.step()
-        #Send shit to memcached
+        #Send shit to nosql
         worldJson = w.to_json(conf.maxtime - rnd/60)
-        self.mc.set('%s' % self.game_id, worldJson)
+        worldJson['id'] = self.game_id
+        self.mc.insert(worldJson)
 
         # Maybe turn this into a log later
         #if not rnd%60:
@@ -235,8 +244,9 @@ class Game(object):
 
 
     def finish(self):
-        worldJson = self.w.to_json(-1)
-        self.mc.set('%s' % self.game_id, worldJson)
+        worldJson = w.to_json(-1)
+        worldJson['id'] = self.game_id
+        self.mc.insert(worldJson)
         print 'FINISHING'
 
         models = self.models

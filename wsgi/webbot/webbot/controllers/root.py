@@ -60,9 +60,7 @@ class RootController(BaseController):
     @expose('webbot.templates.gamelist')
     def games(self):
         """List all the available games."""
-        import memcache
-        mc = memcache.Client(['127.0.0.1:11211'])
-        game_list = mc.get('games') or []
+        game_list = model.Game.query().all()
         return dict(games=game_list)
 
     @expose('json')
@@ -71,23 +69,15 @@ class RootController(BaseController):
         # loc is the current location of the robot in
         #   (x, y, robot_orientation, turret_orientation)
         # format
-        import memcache
-        mc = memcache.Client(['127.0.0.1:11211'])
-        return json.loads(mc.get(game_id.encode('ascii')))
 
-    @expose('json')
-    def store(self, value):
-        import memcache
-        mc = memcache.Client(['127.0.0.1:11211'])
-        mc.set('key', value)
-        cached=mc.get(value)
-        return dict(cached=cached)
+        if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
+            conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
+                                 os.environ.get('OPENSHIFT_NOSQL_DB_PORT'))
+        else:
+            conn = Connection()
+        db = conn.pybot
 
-    @expose('json')
-    def cached(self):
-        import memcache
-        mc = memcache.Client(['127.0.0.1:11211'])
-        return dict(cached=mc.get('key'))
+        return json.loads(db.find_one({'id':game_id}).encode('ascii')))
 
     @expose('webbot.templates.environ')
     def environ(self):
@@ -127,14 +117,12 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
-        import memcache
         robots = ''
         for key in kwargs.keys(): robots += key + ' '
         robots = robots[:-1]
         game_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, robots + str(clock())))
 
         # Try to detect OpenShiftiness
-        import os
         base = os.environ.get('OPENSHIFT_REPO_DIR')
         if not base:
             base = '../../'
@@ -142,10 +130,8 @@ class RootController(BaseController):
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
                          cwd=base+'pybotwar')
 
-        mc = memcache.Client(['127.0.0.1:11211'])
-        games = mc.get('games') or []
-        games.append(dict(name=robots, id=game_id))
-        mc.set('games', games)
+        new_game = model.Game(game_id)
+        DBSession.add(new_game)
         sleep(1)
         redirect('/game?game_id=%s' % (game_id))
 
