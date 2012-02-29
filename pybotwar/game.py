@@ -233,9 +233,10 @@ class Game(object):
 
         w.step()
         #Send shit to nosql
-        worldJson = w.to_json(conf.maxtime - rnd/60)
-        worldJson['id'] = self.game_id
-        self.mc.insert(worldJson)
+        worldData = w.to_dict()
+        worldData['id'] = self.game_id
+        worldData['time'] = conf.maxtime - rnd/60
+        self.mc.insert(worldData)
 
         # Maybe turn this into a log later
         #if not rnd%60:
@@ -244,9 +245,10 @@ class Game(object):
 
 
     def finish(self):
-        worldJson = w.to_json(-1)
-        worldJson['id'] = self.game_id
-        self.mc.insert(worldJson)
+        worldData = w.to_dict()
+        worldData['id'] = self.game_id
+        worldData['time'] = -1
+        self.mc.insert(worldData)
         print 'FINISHING'
 
         models = self.models
