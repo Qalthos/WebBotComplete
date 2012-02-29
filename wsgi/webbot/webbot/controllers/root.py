@@ -61,7 +61,7 @@ class RootController(BaseController):
     @expose('webbot.templates.gamelist')
     def games(self):
         """List all the available games."""
-        game_list = model.Game.query().all()
+        game_list = Dbsession.query(model.Game).all()
         return dict(games=game_list)
 
     @expose('json')
