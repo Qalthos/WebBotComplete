@@ -16,6 +16,7 @@ from random import randrange
 import subprocess
 import uuid
 from time import clock, sleep
+from pymongo import Connection
 import os
 
 __all__ = ['RootController']
