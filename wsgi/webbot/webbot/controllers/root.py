@@ -71,12 +71,14 @@ class RootController(BaseController):
         #   (x, y, robot_orientation, turret_orientation)
         # format
 
+        return {}
+
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
             conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
                               int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
             db = conn.pybot
-            #db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-            #                os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            db.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
+                            os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
         else:
             db = Connection().pybot
 

@@ -42,8 +42,8 @@ class Game(object):
             conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'),
                               int(os.environ.get('OPENSHIFT_NOSQL_DB_PORT')))
             self.mc = conn.pybot
-            #self.mc.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
-            #                     os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
+            self.mc.authenticate(os.environ.get('OPENSHIFT_NOSQL_DB_USERNAME'),
+                                 os.environ.get('OPENSHIFT_NOSQL_DB_PASSWORD'))
         else:
             self.mc = Connection().pybot
 
