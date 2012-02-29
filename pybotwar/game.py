@@ -33,7 +33,7 @@ from pymongo import Connection
 import os
 
 class Game(object):
-    def __init__(self, testmode=False, tournament=None, gameID=0, robots=[]):
+    def __init__(self, testmode=False, tournament=None, gameID='', robots=[]):
         self.testmode = testmode
         self.tournament = tournament
         self.game_id = gameID
@@ -238,7 +238,8 @@ class Game(object):
         #Send shit to nosql
         worldData = w.to_dict()
         worldData['time'] = conf.maxtime - rnd/60
-        self.mc[self.game_id].insert(worldData)
+        worldData['_id'] = 1
+        self.mc[self.game_id].save(worldData)
 
         # Maybe turn this into a log later
         #if not rnd%60:

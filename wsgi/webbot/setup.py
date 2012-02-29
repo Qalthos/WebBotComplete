@@ -39,6 +39,8 @@ install_requires=[
     "tw.forms",
     "pymongo",
     "mysql-python",
+    "WebOb==1.0.8",
+    "Pylons==1.0",
     ]
 
 if sys.version_info[:2] == (2,4):
