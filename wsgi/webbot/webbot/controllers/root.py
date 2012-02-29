@@ -16,7 +16,6 @@ from random import randrange
 import subprocess
 import uuid
 from time import clock, sleep
-import json
 import os
 
 __all__ = ['RootController']
@@ -78,7 +77,7 @@ class RootController(BaseController):
             conn = Connection()
         db = conn.pybot
 
-        return json.loads(db.find_one({'id':game_id}).encode('ascii'))
+        return db.find_one({'id':game_id})
 
     @expose('webbot.templates.environ')
     def environ(self):
