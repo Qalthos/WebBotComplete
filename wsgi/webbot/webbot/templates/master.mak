@@ -4,9 +4,9 @@
 <head>
     ${self.meta()}
     <title>${self.title()}</title>
-    	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="${tg.url('/javascript/cookie.js')}"></script>
-	<script type="text/javascript" src="${tg.url('/javascript/auth-fb.js')}"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="${tg.url('/javascript/cookie.js')}"></script>
+    <script type="text/javascript" src="${tg.url('/javascript/auth-fb.js')}"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/style.css')}" />
     <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/admin.css')}" />
 </head>
@@ -20,11 +20,6 @@
 <%def name="content_wrapper()">
     <div id="content">
     <div>
-    % if page:
-      <div class="currentpage">
-       Now Viewing: <span>${page}</page>
-      </div>
-    % endif
       <%
       flash=tg.flash_obj.render('flash', use_js=False)
       %>
