@@ -75,9 +75,9 @@ class RootController(BaseController):
                                  os.environ.get('OPENSHIFT_NOSQL_DB_PORT'))
         else:
             conn = Connection()
-        db = conn.pybot
+        db = conn.pybot[game_id]
 
-        return db.find_one({'id':game_id})
+        return db.find_one()
 
     @expose('webbot.templates.environ')
     def environ(self):

@@ -234,9 +234,8 @@ class Game(object):
         w.step()
         #Send shit to nosql
         worldData = w.to_dict()
-        worldData['id'] = self.game_id
         worldData['time'] = conf.maxtime - rnd/60
-        self.mc.insert(worldData)
+        self.mc[self.game_id].insert(worldData)
 
         # Maybe turn this into a log later
         #if not rnd%60:
