@@ -71,8 +71,6 @@ class RootController(BaseController):
         #   (x, y, robot_orientation, turret_orientation)
         # format
 
-        return {'robots': []}
-
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
             conn = Connection.from_uri(os.environ.get('OPENSHIFT_NOSQL_DB_URI'))
         else:
