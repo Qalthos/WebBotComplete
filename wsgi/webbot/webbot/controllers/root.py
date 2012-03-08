@@ -56,7 +56,7 @@ class RootController(BaseController):
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
             local_file.write(upload.read())
 
-        robot = model.Robot(userid=user.id, displayname=name)
+        robot = model.Robot(userid=uid, displayname=name)
         DBSession.add(robot)
 
         redirect("/")
