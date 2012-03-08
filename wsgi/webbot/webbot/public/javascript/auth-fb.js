@@ -9,7 +9,8 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
-      console.log(obj['name']);
+      username = obj['name']
+      userid = obj['id']
       return obj;
     }
   };
