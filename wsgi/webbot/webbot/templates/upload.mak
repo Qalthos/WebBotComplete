@@ -8,9 +8,9 @@
 Upload your robots code here
 </p>
 <form action="upload_code" enctype="multipart/form-data" method="POST">
-<input type="file" name="code">
+<input type="file" name="code"/>
 <br />
-<input type="submit" name="submit">
+<input type="submit" name="submit"/>
 </form>
 
 </div>
