@@ -51,14 +51,15 @@
   {
     if(getCookie("auth_cookie")==null)
     {
-		var access_token;
-		if (window.location.hash.length === 0) {
-		  return force_login();
-		} else {
-		  access_token = window.location.hash.substring(14).split('&')[0];
-		  setCookie('auth_cookie', access_token);
-		  return act_on_login(access_token);
-		}
+        var access_token;
+        if (window.location.hash.length === 0) {
+          return force_login();
+        } else {
+          console.log(window.location.hash);
+          access_token = window.location.hash.substring(14).split('&')[0];
+          setCookie('auth_cookie', access_token);
+          return act_on_login(access_token);
+        }
     }
     else
     {
