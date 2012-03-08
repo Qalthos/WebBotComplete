@@ -3,10 +3,6 @@
 	Upload your robot code here
 </%def>
 
-<script>
-	$(':input:hidden').val(data['id'])
-</script>
-
 <div id="info">
 <p>
 Upload your robots code here

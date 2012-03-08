@@ -61,13 +61,13 @@
 </%def>
 <%def name="main_menu()">
   <ul id="mainmenu">
-    <li class="first"><a href="${tg.url('/')}" class="${('', 'active')[page=='index']}">Welcome</a></li>
-        <li><a href="${tg.url('/robots')}" class="${('', 'active')}">Robots!</a></li>
-        <li><a href="${tg.url('/games')}" class="${('', 'active')}">Games</a></li>
-        <li><a href="${tg.url('/code')}" class="${('', 'activae')}">Code</a></li>
-      <span>
-            <li id="login" class="loginlogout"><a href="#"></a></li>
-      </span>
+    <li class="first"><a href="${tg.url('/')}" class="${('', 'active')}">Welcome</a></li>
+    <li><a href="${tg.url('/robots')}" class='uid' class="${('', 'active')}">Pick Robots</a></li>
+    <li><a href="${tg.url('/games')}" class='uid' class="${('', 'active')}">Watch Games</a></li>
+    <li><a href="${tg.url('/code')}" class='uid' class="${('', 'active')}">Upload Code</a></li>
+    <span>
+        <li id="login" class="loginlogout"><a href="#"></a></li>
+    </span>
   </ul>
 </%def>
 </html>
