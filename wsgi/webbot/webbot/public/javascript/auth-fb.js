@@ -55,9 +55,11 @@
         if (window.location.hash.length === 0) {
           return force_login();
         } else {
-          console.log(window.location.hash);
-          access_token = window.location.hash.substring(14).split('&')[0];
-          setCookie('auth_cookie', access_token);
+          response = window.location.hash.substring(1).split('&');
+          console.log(response);
+          access_token = response[0].split('=')[1];
+          expire = response[1].split('=')[1];
+          setCookie('auth_cookie', access_token, expire);
           return act_on_login(access_token);
         }
     }
@@ -69,9 +71,9 @@
   };
 
 
-  setCookie = function(c_name,value)
+  setCookie = function(c_name, value, expire)
   {
-    $.cookie(c_name, value, { expires: 1 });
+    $.cookie(c_name, value, { expires: expire });
   };
 
   getCookie = function(c_name)
