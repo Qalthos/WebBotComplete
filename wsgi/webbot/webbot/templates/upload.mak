@@ -4,7 +4,7 @@
 </%def>
 
 <script>
-	$($(':input:hidden').value(data['userid']))
+	$(':input:hidden').val(data['id'])
 </script>
 
 <div id="info">

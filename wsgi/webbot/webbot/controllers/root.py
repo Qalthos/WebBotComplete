@@ -36,30 +36,7 @@ class RootController(BaseController):
     must be wrapped around with :class:`tg.controllers.WSGIAppController`.
 
     """
-
     error = ErrorController()
-    @expose('webbot.templates.upload')
-    def code(self):
-        return dict()
-
-    @expose()
-    def upload_code(self, **kw):
-        upload = kw['code'].file
-        name = kw['name']
-        uid = kw['userid']
-
-        robot = model.Robot(userid=uid, displayname=name)
-        DBSession.add(robot)
-
-        # Try to detect OpenShiftiness
-        base = os.environ.get('OPENSHIFT_REPO_DIR')
-        if not base:
-            base = '../../'
-
-        with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
-            local_file.write(upload.read())
-
-        redirect("/")
 
     @expose('webbot.templates.index')
     def index(self):
@@ -84,6 +61,10 @@ class RootController(BaseController):
         """List all the available games."""
         game_list = DBSession.query(model.Game).all()
         return dict(games=game_list)
+
+    @expose('webbot.templates.upload')
+    def code(self):
+        return dict()
 
     @expose('json')
     def robo_data(self, game_id):
@@ -119,6 +100,25 @@ class RootController(BaseController):
         DBSession.add(new_game)
         sleep(1)
         redirect('/game?game_id=%s' % (game_id))
+
+    @expose()
+    def upload_code(self, **kw):
+        upload = kw['code'].file
+        name = kw['name']
+        uid = kw['userid']
+
+        robot = model.Robot(userid=uid, displayname=name)
+        DBSession.add(robot)
+
+        # Try to detect OpenShiftiness
+        base = os.environ.get('OPENSHIFT_REPO_DIR')
+        if not base:
+            base = '../../'
+
+        with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
+            local_file.write(upload.read())
+
+        redirect("/")
 
     @expose()
     def do_login(self, name, access_token, came_from=lurl('/')):
