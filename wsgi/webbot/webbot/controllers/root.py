@@ -45,14 +45,15 @@ class RootController(BaseController):
     @expose()
     def upload_code(self, **kw):
         upload = kw['code'].file
-        name = kw['code'].filename
+        name = kw['name']
+        uid = kw['userid']
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR')
         if not base:
             base = '../../'
 
-        with open("%spybotwar/robots/%s@%s.py" % (base, name, user.name), 'w') as local_file:
+        with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
             local_file.write(upload.read())
 
         robot = model.Robot(userid=user.id, displayname=name)
