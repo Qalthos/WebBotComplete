@@ -9,29 +9,19 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
-      username = obj['name']
-      userid = obj['id']
-      return obj;
+      return;
     }
   };
 
   act_on_login = function(access_token) {
     var path, query, script, url;
+    setCookie("auth_cookie",access_token);
+    globals.access_token = access_token;
     path = "https://graph.facebook.com/me?";
     query = $.param({
       access_token: getCookie("auth_cookie"),
       callback: 'logged_in_callback'
     });
-
-    auth = {access_token: access_token,
-            id: userid,
-            name: username,
-        };
-    setCookie("auth_cookie",auth);
-    globals.access_token = access_token;
-    globals.username = username;
-    globals.userid = userid;
-
     url = path + query;
     script = document.createElement('script');
     script.src = url;
