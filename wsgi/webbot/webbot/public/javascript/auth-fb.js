@@ -66,7 +66,7 @@
   handle_page = function() {
       $('#login > a').text("Hello, "+globals.data['name']);
       $(':input:hidden').val(globals.data['id']);
-      $('.uid').href($(this).href+globals.data['id']);
+      $('.uid').attr('href', $(this).attr('href')+globals.data['id']);
   };
 
 
