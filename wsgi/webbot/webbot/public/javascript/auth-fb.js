@@ -44,8 +44,7 @@
     }
   };
 
-  check_auth = function()
-  {
+  check_auth = function() {
     if(getCookie("auth_cookie")==null)
     {
         var access_token;
@@ -68,13 +67,11 @@
   };
 
 
-  setCookie = function(c_name, value, expire)
-  {
+  setCookie = function(c_name, value, expire) {
     $.cookie(c_name, value, { expires: expire });
   };
 
-  getCookie = function(c_name)
-  {
+  getCookie = function(c_name) {
     return $.cookie(c_name);
   };
 

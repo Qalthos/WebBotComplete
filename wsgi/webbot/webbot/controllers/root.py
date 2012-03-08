@@ -46,7 +46,6 @@ class RootController(BaseController):
     def upload_code(self, **kw):
         upload = kw['code'].file
         name = kw['code'].filename
-        print((type(kw['code']), kw['code']))
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR')
