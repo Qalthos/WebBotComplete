@@ -9,7 +9,7 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
-      data = obj;
+      globals.data = obj;
       return;
     }
   };
