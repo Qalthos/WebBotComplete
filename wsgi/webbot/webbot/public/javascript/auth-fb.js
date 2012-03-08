@@ -15,7 +15,7 @@
 
   act_on_login = function(access_token) {
     var path, query, script, url;
-    setCookie("auth_cookie",access_token);
+    //setCookie("auth_cookie",access_token);
     globals.access_token = access_token;
     path = "https://graph.facebook.com/me?";
     query = $.param({
@@ -54,10 +54,9 @@
           response = window.location.hash.substring(1).split('&');
           access_token = response[0].split('=')[1];
           expire = response[1].split('=')[1] * 1000 + new Date().getTime();
-          expire = new Date(expire)
-          console.log(expire)
-          //setCookie('auth_cookie', access_token, expire);
-          return act_on_login(access_token, expire);
+          expire = new Date(expire);
+          setCookie('auth_cookie', access_token, expire);
+          return act_on_login(access_token);
         }
     }
     else
