@@ -55,11 +55,11 @@
           expire = response[1].split('=')[1] * 1000 + new Date().getTime();
           expire = new Date(expire);
           setCookie('auth_cookie', access_token, expire);
-          return act_on_login(access_token);
+          act_on_login(access_token);
         }
     }
     else {
-      return act_on_login(getCookie("auth_cookie"));
+      act_on_login(getCookie("auth_cookie"));
     }
 
     $('#login').text("Hello, "+globals.data['username']);
