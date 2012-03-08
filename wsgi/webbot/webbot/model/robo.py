@@ -12,9 +12,23 @@ from datetime import datetime
 from webbot.model import DeclarativeBase, metadata, DBSession
 
 class Game(DeclarativeBase):
-    __tablename__ = 'games'
+    __tablename__ = 'game'
 
     id = Column(Unicode(255), primary_key=True)
-    username = Column(Unicode(255), nullable=True)
+    userid = Column(Unicode(255), nullable=True)
     name = Column(Unicode(255), nullable=True)
     date = Column(DateTime, nullable=True)
+
+class Login(DeclarativeBase):
+    __tablename__ = 'user'
+
+    id = Column(Unicode(255), primary_key=True)
+    username = Column(Unicode(255), nullable=False)
+    access_token = Column(Unicode(255), nullable=False)
+
+class Robot(DeclarativeBase):
+    __tablename__ = 'robot'
+
+    id = Column(Unicode(255), primary_key=True)
+    displayname = Column(Unicode(255), nullable=False)
+    userid = Column(Unicode(255), nullable=False)
