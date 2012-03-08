@@ -9,6 +9,7 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
+      $('#login').text("Hello, "+obj['username']);
       globals.data = obj;
       return;
     }
@@ -55,14 +56,12 @@
           expire = response[1].split('=')[1] * 1000 + new Date().getTime();
           expire = new Date(expire);
           setCookie('auth_cookie', access_token, expire);
-          act_on_login(access_token);
+          return act_on_login(access_token);
         }
     }
     else {
-      act_on_login(getCookie("auth_cookie"));
+      return act_on_login(getCookie("auth_cookie"));
     }
-
-    $('#login').text("Hello, "+data['username']);
   };
 
 
