@@ -17,13 +17,21 @@
 
   act_on_login = function(access_token) {
     var path, query, script, url;
-    setCookie("auth_cookie",access_token);
-    globals.access_token = access_token;
     path = "https://graph.facebook.com/me?";
     query = $.param({
       access_token: getCookie("auth_cookie"),
       callback: 'logged_in_callback'
     });
+
+    auth = {access_token: access_token,
+            id: userid,
+            name: username,
+        };
+    setCookie("auth_cookie",auth);
+    globals.access_token = access_token;
+    globals.username = username;
+    globals.userid = userid;
+
     url = path + query;
     script = document.createElement('script');
     script.src = url;
@@ -58,8 +66,8 @@
           expire = response[1].split('=')[1] * 1000 + new Date().getTime();
           expire = new Date(expire)
           console.log(expire)
-          setCookie('auth_cookie', access_token, expire);
-          return act_on_login(access_token);
+          //setCookie('auth_cookie', access_token, expire);
+          return act_on_login(access_token, expire);
         }
     }
     else
