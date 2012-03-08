@@ -9,7 +9,8 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
-      return;
+      console.log(obj['name']);
+      return obj;
     }
   };
 
@@ -41,10 +42,6 @@
       url = path + query;
       return window.location = url;
     }
-    else
-    {
-      redirect('/robots');
-    }
   };
 
   check_auth = function()
@@ -56,10 +53,10 @@
           return force_login();
         } else {
           response = window.location.hash.substring(1).split('&');
-          console.log(response);
           access_token = response[0].split('=')[1];
-          expire = response[1].split('=')[1] * 1000;
-          expire += new Date().getTime();
+          expire = response[1].split('=')[1] * 1000 + new Date().getTime();
+          expire = new Date(expire)
+          console.log(expire)
           setCookie('auth_cookie', access_token, expire);
           return act_on_login(access_token);
         }
