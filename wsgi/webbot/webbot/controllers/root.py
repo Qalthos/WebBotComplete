@@ -48,6 +48,9 @@ class RootController(BaseController):
         name = kw['name']
         uid = kw['userid']
 
+        robot = model.Robot(userid=uid, displayname=name)
+        DBSession.add(robot)
+
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR')
         if not base:
@@ -55,9 +58,6 @@ class RootController(BaseController):
 
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
             local_file.write(upload.read())
-
-        robot = model.Robot(userid=uid, displayname=name)
-        DBSession.add(robot)
 
         redirect("/")
 
