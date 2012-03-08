@@ -66,7 +66,7 @@
         <li><a href="${tg.url('/games')}" class="${('', 'active')}">Games</a></li>
         <li><a href="${tg.url('/code')}" class="${('', 'activae')}">Code</a></li>
       <span>
-            <li id="login" class="loginlogout"></li>
+            <li id="login" class="loginlogout"><a href="#"></a></li>
       </span>
   </ul>
 </%def>

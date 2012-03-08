@@ -9,7 +9,7 @@
     if (obj.error != null) {
       return alert("Some auth problem with facebook.  Failing.");
     } else {
-      $('#login').text("Hello, "+obj['username']);
+      $('#login > a').text("Hello, "+obj['name']);
       globals.data = obj;
       return;
     }
