@@ -62,7 +62,7 @@
       act_on_login(getCookie("auth_cookie"));
     }
 
-    $('#login').text("Hello, "+globals.data['username']);
+    $('#login').text("Hello, "+data['username']);
   };
 
 
