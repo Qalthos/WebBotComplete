@@ -40,7 +40,7 @@ class RootController(BaseController):
     error = ErrorController()
     @expose('webbot.templates.upload')
     def code(self):
-        return dict(page='code')
+        return dict()
 
     @expose()
     def upload_code(self, **kw):
@@ -64,7 +64,7 @@ class RootController(BaseController):
     @expose('webbot.templates.index')
     def index(self):
         """Handle the front-page."""
-        return
+        return dict()
 
     @expose('webbot.templates.bots')
     def game(self, game_id=''):
