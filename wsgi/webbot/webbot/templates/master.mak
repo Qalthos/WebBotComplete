@@ -65,16 +65,9 @@
         <li><a href="${tg.url('/robots')}" class="${('', 'active')}">Robots!</a></li>
         <li><a href="${tg.url('/games')}" class="${('', 'active')}">Games</a></li>
         <li><a href="${tg.url('/code')}" class="${('', 'activae')}">Code</a></li>
-    % if tg.auth_stack_enabled:
       <span>
-          % if not request.identity:
-            <li id="login" class="loginlogout"><a href="${tg.url('/login')}">Login</a></li>
-          % else:
-            <li id="login" class="loginlogout"><a href="${tg.url('/logout_handler')}">Logout</a></li>
-            <li id="admin" class="loginlogout"><a href="${tg.url('/admin')}">Admin</a></li>
-          % endif
+            <li id="login" class="loginlogout"></li>
       </span>
-    % endif
   </ul>
 </%def>
 </html>

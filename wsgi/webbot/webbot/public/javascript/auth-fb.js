@@ -45,8 +45,7 @@
   };
 
   check_auth = function() {
-    if(getCookie("auth_cookie")==null)
-    {
+    if(getCookie("auth_cookie")==null) {
         var access_token;
         if (window.location.hash.length === 0) {
           return force_login();
@@ -59,11 +58,11 @@
           return act_on_login(access_token);
         }
     }
-    else
-    {
+    else {
       return act_on_login(getCookie("auth_cookie"));
     }
 
+    $('#login').text("Hello, "+globals.data['username']);
   };
 
 
