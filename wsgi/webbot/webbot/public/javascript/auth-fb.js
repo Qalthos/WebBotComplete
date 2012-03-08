@@ -58,7 +58,8 @@
           response = window.location.hash.substring(1).split('&');
           console.log(response);
           access_token = response[0].split('=')[1];
-          expire = response[1].split('=')[1];
+          expire = response[1].split('=')[1] * 1000;
+          expire += new Date().getTime();
           setCookie('auth_cookie', access_token, expire);
           return act_on_login(access_token);
         }
