@@ -91,7 +91,8 @@ class RootController(BaseController):
         user_bot = kwargs['user']
         del kwargs['user']
 
-        robots = user_bot + ' ' + ' '.join(kwargs.keys())
+        robots = ' '.join(kwargs.keys())
+        robots += ' ' + userid + '@' + user_bot
         print(robots)
         game_id = str(uuid.uuid4())
 
@@ -120,6 +121,7 @@ class RootController(BaseController):
         if not base:
             base = '../../'
 
+        print("%spybotwar/robots/%s@%s.py" % (base, name, uid))
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
             local_file.write(upload.read())
 
