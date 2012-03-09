@@ -17,10 +17,6 @@ import os
 
 __all__ = ['RootController']
 
-# Add this function OUTSIDE of the RootController
-def log_message(msg):
-    model.DBSession.add(model.Message(msg=msg))
-
 class RootController(BaseController):
     """
     The root controller for the webbot application.
@@ -57,10 +53,11 @@ class RootController(BaseController):
         return dict(user_robots=user_list, robots=robo_list)
 
     @expose('webbot.templates.gamelist')
-    def games(self):
+    def games(self, userid=None):
         """List all the available games."""
-        game_list = DBSession.query(model.Game).all()
-        return dict(games=game_list)
+        user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
+        game_list = DBSession.query(model.Game).filter(model.Game.userid!=userid).all()
+        return dict(your_games=user_games, games=game_list)
 
     @expose('webbot.templates.upload')
     def code(self):
