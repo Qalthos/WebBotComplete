@@ -84,7 +84,6 @@ class RootController(BaseController):
 
     @expose('json')
     def start_game(self, **kwargs):
-        return kwargs
         userid = kwargs['userid']
         del kwargs['userid']
 
@@ -93,7 +92,6 @@ class RootController(BaseController):
 
         robots = ' '.join(kwargs.keys())
         robots += ' ' + userid + '@' + user_bot
-        print(robots)
         game_id = str(uuid.uuid4())
 
         # Try to detect OpenShiftiness
