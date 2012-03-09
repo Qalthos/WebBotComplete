@@ -23,12 +23,12 @@ class Login(DeclarativeBase):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    username = Column(Unicode(255), nullable=False)
+    name = Column(Unicode(255), nullable=False)
     access_token = Column(Unicode(255), nullable=False)
 
 class Robot(DeclarativeBase):
     __tablename__ = 'robot'
 
     id = Column(Integer, primary_key=True)
-    displayname = Column(Unicode(255), nullable=False)
+    name = Column(Unicode(255), nullable=False)
     userid = Column(Unicode(255), nullable=False)
