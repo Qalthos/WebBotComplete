@@ -14,6 +14,7 @@ import uuid
 from time import clock, sleep
 from datetime import datetime
 from pymongo import Connection
+from sqlalchemy import desc
 import os
 
 __all__ = ['RootController']
@@ -57,7 +58,9 @@ class RootController(BaseController):
     def games(self, userid=None):
         """List all the available games."""
         user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
-        game_list = DBSession.query(model.Game).filter(model.Game.userid!=userid).all()
+        game_list = DBSession.query(model.Game)
+                             .filter(model.Game.userid != userid)
+                             .order_by(desc(model.Game.date)).limit(10).all()
         return dict(your_games=user_games, games=game_list)
 
     @expose('webbot.templates.upload')
@@ -94,7 +97,7 @@ class RootController(BaseController):
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
                          cwd=base+'pybotwar')
 
-        new_game = model.Game(id=game_id, name=robots)
+        new_game = model.Game(id=game_id, name=robots, date=datetime.now())
         DBSession.add(new_game)
         sleep(1)
         redirect('/game?game_id=%s' % (game_id))
