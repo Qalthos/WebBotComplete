@@ -6,7 +6,6 @@ from tg.i18n import ugettext as _, lazy_ugettext as l_
 from webbot import model
 from repoze.what import predicates
 from webbot.model import DBSession, metadata
-from tgext.admin.tgadminconfig import TGAdminConfig
 
 from webbot.lib.base import BaseController
 from webbot.controllers.error import ErrorController
