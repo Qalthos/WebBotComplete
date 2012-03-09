@@ -90,7 +90,7 @@ class RootController(BaseController):
         robots = ''
         for key in kwargs.keys(): robots += key + ' '
         robots = robots[:-1]
-        game_id = str(uuid.uuid5(userid, robots + str(clock())))
+        game_id = str(uuid.uuid4())
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR')
