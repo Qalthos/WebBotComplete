@@ -14,7 +14,7 @@ from webbot.model import DeclarativeBase, metadata, DBSession
 class Game(DeclarativeBase):
     __tablename__ = 'game'
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Unicode(255), primary_key=True)
     userid = Column(Unicode(255), nullable=False)
     name = Column(Unicode(255), nullable=False)
     date = Column(DateTime, nullable=False)
