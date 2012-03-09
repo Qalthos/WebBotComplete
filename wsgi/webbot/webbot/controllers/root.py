@@ -84,10 +84,13 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
+        userid = kwargs['userid']
+        del kwargs['userid']
+
         robots = ''
         for key in kwargs.keys(): robots += key + ' '
         robots = robots[:-1]
-        game_id = str(uuid.uuid3(uuid.NAMESPACE_DNS, robots + str(clock())))
+        game_id = str(uuid.uuid5(userid, robots + str(clock())))
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR')
@@ -97,7 +100,7 @@ class RootController(BaseController):
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
                          cwd=base+'pybotwar')
 
-        new_game = model.Game(id=game_id, name=robots, date=datetime.now())
+        new_game = model.Game(id=game_id, name=robots, userid=userid, date=datetime.now())
         DBSession.add(new_game)
         sleep(1)
         redirect('/game?game_id=%s' % (game_id))
