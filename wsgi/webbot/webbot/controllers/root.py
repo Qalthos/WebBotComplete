@@ -111,7 +111,7 @@ class RootController(BaseController):
         name = kw['name']
         uid = kw['userid']
 
-        robot = model.Robot(userid=uid, displayname=name)
+        robot = model.Robot(userid=uid, name=name)
         DBSession.add(robot)
 
         # Try to detect OpenShiftiness
