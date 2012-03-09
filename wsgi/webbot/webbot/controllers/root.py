@@ -84,6 +84,7 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
+        return kwargs
         userid = kwargs['userid']
         del kwargs['userid']
 
