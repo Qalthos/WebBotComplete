@@ -58,9 +58,9 @@ class RootController(BaseController):
     def games(self, userid=None):
         """List all the available games."""
         user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
-        game_list = DBSession.query(model.Game) \
-                             .filter(model.Game.userid != userid) \
-                             .order_by(desc(model.Game.date)).limit(10).all()
+        #game_list = DBSession.query(model.Game) \
+        #                     .filter(model.Game.userid != userid) \
+        #                     .order_by(desc(model.Game.date)).limit(10).all()
         return dict(your_games=user_games, games=game_list)
 
     @expose('webbot.templates.upload')
