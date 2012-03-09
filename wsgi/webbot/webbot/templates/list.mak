@@ -16,6 +16,13 @@
 
 <form action='start_game'>
   <span id='error'></span>
+  %for robot in user_robots:
+    <div>
+	  <span>${robot.name}</span>
+	  <input onclick='countCheck()' type='radio' name='user'/>
+    </div>
+  %endfor
+
   %for robot in robots:
     <div>
 	  <span>${robot} Robot</span>
