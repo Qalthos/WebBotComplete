@@ -82,7 +82,7 @@ class RootController(BaseController):
 
         return db[game_id].find_one()
 
-    @expose()
+    @expose('json')
     def start_game(self, **kwargs):
         return kwargs
         userid = kwargs['userid']
