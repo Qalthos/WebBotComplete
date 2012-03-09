@@ -57,11 +57,10 @@ class RootController(BaseController):
     @expose('webbot.templates.gamelist')
     def games(self, userid=None):
         """List all the available games."""
-        print("#######%r" % type(userid))
-        user_games = []#]DBSession.query(model.Game).filter_by(userid=userid).all()
-        game_list = []#]DBSession.query(model.Game) \
-        #                     .filter(model.Game.userid != userid) \
-        #                     .order_by(desc(model.Game.date)).limit(10).all()
+        user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
+        game_list = DBSession.query(model.Game) \
+                             .filter(model.Game.userid != userid) \
+                             .order_by(desc(model.Game.date)).limit(10).all()
         return dict(your_games=user_games, games=game_list)
 
     @expose('webbot.templates.upload')
