@@ -15,7 +15,7 @@ class Game(DeclarativeBase):
     __tablename__ = 'game'
 
     id = Column(Unicode(255), primary_key=True)
-    userid = Column(Integer, nullable=False)
+    userid = Column(Unicode(255), nullable=False)
     name = Column(Unicode(255), nullable=False)
     date = Column(DateTime, nullable=False)
 

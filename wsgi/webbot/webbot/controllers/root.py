@@ -84,7 +84,7 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
-        userid = kwargs['userid']
+        userid = str(kwargs['userid'])
         del kwargs['userid']
 
         robots = ''
