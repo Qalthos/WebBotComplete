@@ -29,5 +29,6 @@
 	  <input onclick='countCheck()' type='checkbox' name='${robot}'/>
     </div>
   %endfor
-  <input id='submit' type='submit'/>
+  <input type='hidden' name='userid'/>
+  <input id='submit' type='submit' value='Go'/>
 </form>
