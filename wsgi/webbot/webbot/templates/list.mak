@@ -19,7 +19,7 @@
   %for robot in user_robots:
     <div>
 	  <span>${robot.name}</span>
-	  <input onclick='countCheck()' type='radio' name='user'/>
+	  <input onclick='countCheck()' type='radio' value='${robot.name}' name='user'/>
     </div>
   %endfor
 
