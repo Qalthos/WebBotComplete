@@ -84,11 +84,14 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
-        userid = str(kwargs['userid'])
+        userid = kwargs['userid']
         del kwargs['userid']
 
-        robots = ''
-        for key in kwargs.keys(): robots += key + ' '
+        user_bot = kwargs['user']
+        del kwargs['user']
+
+        print(kwargs.keys())
+        robots = user_bot + ' ' + ' '.join(kwargs.keys())
         robots = robots[:-1]
         game_id = str(uuid.uuid4())
 
