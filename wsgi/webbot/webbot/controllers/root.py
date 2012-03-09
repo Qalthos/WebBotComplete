@@ -115,9 +115,7 @@ class RootController(BaseController):
         DBSession.add(robot)
 
         # Try to detect OpenShiftiness
-        base = os.environ.get('OPENSHIFT_REPO_DIR')
-        if not base:
-            base = '../../'
+        base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
 
         print("%spybotwar/robots/%s@%s.py" % (base, name, uid))
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
