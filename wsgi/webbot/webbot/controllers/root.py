@@ -57,7 +57,7 @@ class RootController(BaseController):
     @expose('webbot.templates.gamelist')
     def games(self, userid=None):
         """List all the available games."""
-        print("#######"+type(userid))
+        print("#######%r" % type(userid))
         user_games = []#]DBSession.query(model.Game).filter_by(userid=userid).all()
         game_list = []#]DBSession.query(model.Game) \
         #                     .filter(model.Game.userid != userid) \
