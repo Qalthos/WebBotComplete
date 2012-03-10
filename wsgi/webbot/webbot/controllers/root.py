@@ -12,10 +12,11 @@ from webbot.controllers.error import ErrorController
 import subprocess
 import uuid
 from time import clock, sleep
-from datetime import datetime
 from pymongo import Connection
-from sqlalchemy import desc
 import os
+
+from sqlalchemy import desc
+from datetime import datetime
 
 __all__ = ['RootController']
 
@@ -82,7 +83,7 @@ class RootController(BaseController):
 
         return db[game_id].find_one()
 
-    @expose('json')
+    @expose()
     def start_game(self, **kwargs):
         userid = kwargs['userid']
         del kwargs['userid']

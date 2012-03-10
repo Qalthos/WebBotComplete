@@ -16,7 +16,6 @@
 
   act_on_login = function(access_token) {
     var path, query, script, url;
-    //setCookie("auth_cookie",access_token);
     globals.access_token = access_token;
     path = "https://graph.facebook.com/me?";
     query = $.param({
