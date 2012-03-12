@@ -60,9 +60,9 @@ class RootController(BaseController):
 
         # Build a custom widget to hold the form.x
         class RoboForm(WebbotForm):
-            class RadioBots(twf.RadioButtonList()):
+            class user(twf.RadioButtonList()):
                 options = user_list
-            class CheckBots(twf.CheckBoxList()):
+            class example(twf.CheckBoxList()Z):
                 options = robo_list
 
         return dict(form=RoboForm(action='start_game'),
@@ -99,15 +99,9 @@ class RootController(BaseController):
     @expose()
     def start_game(self, **kwargs):
         userid = kwargs['userid']
-        del kwargs['userid']
-
-        print(kwargs)
-
-        user_bot = kwargs['user']
-        del kwargs['user']
-
-        robots = ' '.join(kwargs.keys())
-        robots += ' ' + userid + '@' + user_bot
+        user_bot = userid + '@' + kwargs['user']
+        robots = kwargs['example']
+        robots.append(user_bot)
         game_id = str(uuid.uuid4())
 
         # Try to detect OpenShiftiness
