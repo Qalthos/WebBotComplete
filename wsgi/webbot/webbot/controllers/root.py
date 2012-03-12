@@ -98,11 +98,17 @@ class RootController(BaseController):
 
     @expose()
     def start_game(self, **kwargs):
-        print(kwargs)
         userid = kwargs['userid']
-        user_bot = userid + '@' + kwargs['user']
-        robots = kwargs['example']
-        robots.append(user_bot)
+        robots = []
+
+        print(kwargs)
+
+        if 'user' in kwargs:
+            robots.append(userid + '@' + kwargs['user'])
+
+        if 'example' in kwargs:
+            robots.extend(kwargs['example'])
+
         game_id = str(uuid.uuid4())
 
         # Try to detect OpenShiftiness
