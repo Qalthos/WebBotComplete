@@ -18,6 +18,7 @@ import os
 from sqlalchemy import desc
 from datetime import datetime
 
+import tw2.forms as twf
 from webbot.widgets import WebbotForm, UploadForm
 
 __all__ = ['RootController']
