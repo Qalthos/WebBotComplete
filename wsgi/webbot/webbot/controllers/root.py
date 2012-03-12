@@ -101,20 +101,18 @@ class RootController(BaseController):
         userid = kwargs['userid']
         robots = []
 
-        print(kwargs)
-
         if 'user' in kwargs:
             robots.append(userid + '@' + kwargs['user'])
 
         if 'example' in kwargs:
             robots.extend(kwargs['example'])
 
+        print(['python', 'main.py', '-g', '-I', game_id, '-R', robots])
+
         game_id = str(uuid.uuid4())
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
-
-        print(['python', 'main.py', '-g', '-I', game_id, '-R', robots])
         subprocess.Popen(['python', 'main.py', '-g', '-I', game_id, '-R', robots],
                          cwd=base+'pybotwar')
 
