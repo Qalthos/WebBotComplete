@@ -101,6 +101,8 @@ class RootController(BaseController):
         userid = kwargs['userid']
         del kwargs['userid']
 
+        print(kwargs)
+
         user_bot = kwargs['user']
         del kwargs['user']
 
