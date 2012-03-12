@@ -5,6 +5,6 @@ class RoboForm(twf.TableForm):
     example_bots = twf.CheckBoxList()
 
 class UploadForm(twf.TableForm):
-    file = twf.FileField()
+    code = twf.FileField()
     name = twf.TextField()
     userid = twf.HiddenField()

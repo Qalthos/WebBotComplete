@@ -112,7 +112,7 @@ class RootController(BaseController):
 
     @expose()
     def upload_code(self, **kw):
-        upload = kw['file']
+        code = kw['code']
         name = kw['name']
         uid = kw['userid']
 
