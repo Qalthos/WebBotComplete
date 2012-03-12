@@ -71,7 +71,7 @@ class RootController(BaseController):
     @expose('webbot.templates.upload')
     def code(self):
         return dict(form=UploadForm(action='upload_code'),
-                    title='Upload your robot code here'
+                    title='Upload your robot code here',
                     form_title='Upload your robots code here')
 
     @expose('json')
