@@ -18,6 +18,8 @@ import os
 from sqlalchemy import desc
 from datetime import datetime
 
+from webbot.widgets import UploadForm
+
 __all__ = ['RootController']
 
 class RootController(BaseController):
@@ -66,7 +68,7 @@ class RootController(BaseController):
 
     @expose('webbot.templates.upload')
     def code(self):
-        return dict()
+        return dict(form=UploadForm(action='upload_code'))
 
     @expose('json')
     def robo_data(self, game_id):
