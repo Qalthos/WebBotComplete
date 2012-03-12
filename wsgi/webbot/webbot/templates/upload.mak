@@ -1,6 +1,6 @@
 <%inherit file="local:templates.master"/>
 <%def name="title()">
-	${title}
+	${page_title}
 </%def>
 
 <div id="info">

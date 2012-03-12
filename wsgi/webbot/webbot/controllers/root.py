@@ -66,7 +66,7 @@ class RootController(BaseController):
                 options = robo_list
 
         return dict(form=RoboForm(action='start_game'),
-                    title='',
+                    page_title='',
                     form_title='Here are all the robots you can play with:')
 
     @expose('webbot.templates.gamelist')
@@ -81,7 +81,7 @@ class RootController(BaseController):
     @expose('webbot.templates.upload')
     def code(self):
         return dict(form=UploadForm(action='upload_code'),
-                    title='Upload your robot code here',
+                    page_title='Upload your robot code here',
                     form_title='Upload your robots code here')
 
     @expose('json')
