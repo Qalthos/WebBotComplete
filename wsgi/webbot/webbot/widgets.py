@@ -1,4 +1,4 @@
-from tw2.forms as twf
+import tw2.forms as twf
 
 class RoboForm(twf.TableForm):
     pass
