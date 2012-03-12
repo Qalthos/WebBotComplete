@@ -107,9 +107,9 @@ class RootController(BaseController):
         if 'example' in kwargs:
             robots.extend(kwargs['example'])
 
-        print(['python', 'main.py', '-g', '-I', game_id, '-R', robots])
-
         game_id = str(uuid.uuid4())
+
+        print(['python', 'main.py', '-g', '-I', game_id, '-R', robots])
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
