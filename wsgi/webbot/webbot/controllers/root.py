@@ -53,13 +53,14 @@ class RootController(BaseController):
         """List all the available robots."""
         #TODO: get robot list from somewhere (user?)
         user_list = DBSession.query(model.Robot).filter_by(userid=userid).all()
+        user_list = [x.split('@')[0] for x in user_list]
         robo_list = [u'Ninja', u'Pirate', u'Robot', u'Wizard', u'Velociraptor',
                      u'Zombie', u'robot07', u'robot08']
         return dict(form=RoboForm(user_bots=user_list, example_bots=robo_list, action='start_game'),
                     title='',
                     form_title='Here are all the robots you can play with:')
 
-    @expose('webbot.templates.upload')
+    @expose('webbot.templates.gamelist')
     def games(self, userid=None):
         """List all the available games."""
         user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
@@ -77,9 +78,6 @@ class RootController(BaseController):
     @expose('json')
     def robo_data(self, game_id):
         """Returns the current state of the game as JSON."""
-        # loc is the current location of the robot in
-        #   (x, y, robot_orientation, turret_orientation)
-        # format
 
         if os.environ.get('OPENSHIFT_NOSQL_DB_TYPE') == 'mongodb':
             conn = Connection(os.environ.get('OPENSHIFT_NOSQL_DB_HOST'))
@@ -118,14 +116,15 @@ class RootController(BaseController):
         name = kw['name']
         uid = kw['userid']
 
-        robot = model.Robot(userid=uid, name=name)
-        DBSession.add(robot)
-
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
 
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
             local_file.write(upload)
+
+        # Save a ref to the file in the DB
+        robot = model.Robot(userid=uid, name=name)
+        DBSession.add(robot)
 
         redirect("/")
 
