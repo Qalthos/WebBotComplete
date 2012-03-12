@@ -62,7 +62,7 @@ class RootController(BaseController):
         class RoboForm(WebbotForm):
             class user(twf.RadioButtonList()):
                 options = user_list
-            class example(twf.CheckBoxList()Z):
+            class example(twf.CheckBoxList()):
                 options = robo_list
 
         return dict(form=RoboForm(action='start_game'),
