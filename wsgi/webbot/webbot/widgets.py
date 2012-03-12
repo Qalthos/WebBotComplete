@@ -9,3 +9,4 @@ class GameForm(twf.TableForm):
 class UploadForm(twf.TableForm):
     file = twf.FileField()
     name = twf.TextField()
+    userid = twf.HiddenField()
