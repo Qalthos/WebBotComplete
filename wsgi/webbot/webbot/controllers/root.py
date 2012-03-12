@@ -107,7 +107,8 @@ class RootController(BaseController):
             robots.append(userid + '@' + kwargs['user'])
 
         if 'example' in kwargs:
-            robots.extend(kwargs['example'])
+            for name in kwargs['example']:
+                robots.append(name.encode('utf-8'))
 
         game_id = str(uuid.uuid4())
 
