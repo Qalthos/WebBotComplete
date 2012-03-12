@@ -54,7 +54,7 @@ class RootController(BaseController):
         """List all the available robots."""
         #TODO: get robot list from somewhere (user?)
         user_list = DBSession.query(model.Robot).filter_by(userid=userid).all()
-        user_list = [x.split('@')[0] for x in user_list]
+        user_list = [x.name.split('@')[0] for x in user_list]
         robo_list = [u'Ninja', u'Pirate', u'Robot', u'Wizard', u'Velociraptor',
                      u'Zombie', u'robot07', u'robot08']
 
