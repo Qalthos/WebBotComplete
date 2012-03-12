@@ -18,8 +18,7 @@ import os
 from sqlalchemy import desc
 from datetime import datetime
 
-import tw2.forms as twf
-from webbot.widgets import UploadForm
+from webbot.widgets import WebbotForm, UploadForm
 
 __all__ = ['RootController']
 
@@ -58,7 +57,8 @@ class RootController(BaseController):
         robo_list = [u'Ninja', u'Pirate', u'Robot', u'Wizard', u'Velociraptor',
                      u'Zombie', u'robot07', u'robot08']
 
-        class RoboForm(twf.TableForm):
+        # Build a custom widget to hold the form.x
+        class RoboForm(WebbotForm):
             class RadioBots(twf.RadioButtonList()):
                 options = user_list
             class CheckBots(twf.CheckBoxList()):
