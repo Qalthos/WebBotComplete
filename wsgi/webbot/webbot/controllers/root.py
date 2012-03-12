@@ -18,7 +18,8 @@ import os
 from sqlalchemy import desc
 from datetime import datetime
 
-from webbot.widgets import RoboForm, UploadForm
+import tw2.forms as twf
+from webbot.widgets import UploadForm
 
 __all__ = ['RootController']
 
@@ -56,7 +57,14 @@ class RootController(BaseController):
         user_list = [x.split('@')[0] for x in user_list]
         robo_list = [u'Ninja', u'Pirate', u'Robot', u'Wizard', u'Velociraptor',
                      u'Zombie', u'robot07', u'robot08']
-        return dict(form=RoboForm(user_bots=user_list, example_bots=robo_list, action='start_game'),
+
+        class RoboForm(twf.TableForm):
+            class RadioBots(twf.RadioButtonList()):
+                options = user_list
+            class CheckBots(twf.CheckBoxList()):
+                options = robo_list
+
+        return dict(form=RoboForm(action='start_game'),
                     title='',
                     form_title='Here are all the robots you can play with:')
 
