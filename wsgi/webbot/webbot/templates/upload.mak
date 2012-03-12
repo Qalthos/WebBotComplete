@@ -1,11 +1,11 @@
 <%inherit file="local:templates.master"/>
 <%def name="title()">
-	Upload your robot code here
+	${title}
 </%def>
 
 <div id="info">
 <p>
-Upload your robots code here
+${form_title}
 </p>
 ${form.display() | n}
 

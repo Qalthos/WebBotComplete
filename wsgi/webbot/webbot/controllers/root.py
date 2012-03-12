@@ -18,7 +18,7 @@ import os
 from sqlalchemy import desc
 from datetime import datetime
 
-from webbot.widgets import UploadForm
+from webbot.widgets import RoboForm, UploadForm
 
 __all__ = ['RootController']
 
@@ -48,16 +48,18 @@ class RootController(BaseController):
         """Handle displaying the game."""
         return dict(game_id=game_id, robot_infos=self.robo_data(game_id))
 
-    @expose('webbot.templates.list')
+    @expose('webbot.templates.upload')
     def robots(self, userid=None):
         """List all the available robots."""
         #TODO: get robot list from somewhere (user?)
         user_list = DBSession.query(model.Robot).filter_by(userid=userid).all()
         robo_list = [u'Ninja', u'Pirate', u'Robot', u'Wizard', u'Velociraptor',
                      u'Zombie', u'robot07', u'robot08']
-        return dict(user_robots=user_list, robots=robo_list)
+        return dict(form=RoboForm(user_bots=user_list, example_bots=robo_list, action='start_game'),
+                    title='',
+                    form_title='Here are all the robots you can play with:')
 
-    @expose('webbot.templates.gamelist')
+    @expose('webbot.templates.upload')
     def games(self, userid=None):
         """List all the available games."""
         user_games = DBSession.query(model.Game).filter_by(userid=userid).all()
@@ -68,7 +70,9 @@ class RootController(BaseController):
 
     @expose('webbot.templates.upload')
     def code(self):
-        return dict(form=UploadForm(action='upload_code'))
+        return dict(form=UploadForm(action='upload_code'),
+                    title='Upload your robot code here'
+                    form_title='Upload your robots code here')
 
     @expose('json')
     def robo_data(self, game_id):
@@ -111,7 +115,6 @@ class RootController(BaseController):
     @expose()
     def upload_code(self, **kw):
         upload = kw['file']
-        print(file, type(file))
         name = kw['name']
         uid = kw['userid']
 
@@ -121,9 +124,8 @@ class RootController(BaseController):
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
 
-        print("%spybotwar/robots/%s@%s.py" % (base, name, uid))
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
-            local_file.write(upload.read())
+            local_file.write(upload)
 
         redirect("/")
 
