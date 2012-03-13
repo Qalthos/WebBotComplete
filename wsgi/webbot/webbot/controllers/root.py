@@ -104,7 +104,12 @@ class RootController(BaseController):
         if 'user' in kwargs:
             robots.append(userid + '@' + kwargs['user'])
 
-        if 'example' in kwargs:
+        # If there is only one checked robot, it will be returned as a str,
+        # not a list.
+        examples = kwargs.get('example', [])
+        if isinstance(examples, basestring):
+            robots.append(examples)
+        else:
             robots.extend(kwargs['example'])
 
         robots = ' '.join(robots)
@@ -127,7 +132,7 @@ class RootController(BaseController):
         uid = kw['userid']
 
         if not uid:
-            flash('Must belogged in to upload robots!')
+            flash('Must be logged in to upload robots.')
         else:
             # Try to detect OpenShiftiness
             base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'

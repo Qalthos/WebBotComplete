@@ -1,6 +1,3 @@
-import random
-from math import pi
-
 from robot import Robot
 
 class TheRobot(Robot):
