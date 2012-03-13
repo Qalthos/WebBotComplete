@@ -126,17 +126,18 @@ class RootController(BaseController):
         name = kw['name']
         uid = kw['userid']
 
-        print(code, type(code))
+        if not uid:
+            flash('Must belogged in to upload robots!')
+        else:
+            # Try to detect OpenShiftiness
+            base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
 
-        # Try to detect OpenShiftiness
-        base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
+            with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
+                local_file.write(code)
 
-        with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
-            local_file.write(code)
-
-        # Save a ref to the file in the DB
-        robot = model.Robot(userid=uid, name=name)
-        DBSession.add(robot)
+            # Save a ref to the file in the DB
+            robot = model.Robot(userid=uid, name=name)
+            DBSession.add(robot)
 
         redirect("/")
 
