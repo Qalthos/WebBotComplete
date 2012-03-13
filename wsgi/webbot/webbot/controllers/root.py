@@ -122,9 +122,11 @@ class RootController(BaseController):
 
     @expose()
     def upload_code(self, **kw):
-        code = kw['code']
+        code = kw['code'].value
         name = kw['name']
         uid = kw['userid']
+
+        print(code, type(code))
 
         # Try to detect OpenShiftiness
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
