@@ -132,7 +132,7 @@ class RootController(BaseController):
         base = os.environ.get('OPENSHIFT_REPO_DIR') or '../../'
 
         with open("%spybotwar/robots/%s@%s.py" % (base, name, uid), 'w') as local_file:
-            local_file.write(upload)
+            local_file.write(code)
 
         # Save a ref to the file in the DB
         robot = model.Robot(userid=uid, name=name)
